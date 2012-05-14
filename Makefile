@@ -24,8 +24,8 @@ public : render
 	git clone git@github.com:demandforce/demandforce.github.com.git public
 	mv html/* public/
 
-publish :
-	cd public
-	git add --all
-	git commit -m "Update for $(date)"
-	git push
+publish : public
+	cd public && \
+	  git add --all && \
+	  git commit -m "Update for $(date)" && \
+	  git push
