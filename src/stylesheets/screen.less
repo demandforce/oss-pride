@@ -82,26 +82,38 @@ a {
   }
 
   .content {
-    padding: 30px;
+    padding: 30px 150px 30px 30px;
   }
-  .header {
-    .clearfix();
-    margin-bottom: 20px;
-  }
+  
   h2 {
     font-size: 30px;
     font-weight: 300;
-    float: left;
     line-height: 32px;
+    margin-bottom: 20px;
+    width: 270px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
     a {
       text-decoration: none;
     }
   }
+
+  &.no-homepage {
+    h2 {
+      width: auto;
+    }
+    .content {
+      padding: 30px;
+    }
+  }
+
   img {
-    float: right;
-    width: 32px;
-    height: 32px;
-    .border-radius(2px);
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    width: 100px;
+    .box-shadow(rgba(0,0,0,0.4) 0 1px 3px);
   }
   .meta {
     padding: 0 30px;

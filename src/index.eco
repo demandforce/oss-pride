@@ -13,12 +13,14 @@
       <div class="wrapper">
         <h1>Some of the cool projects we're working on</h1>
         <% for repo in @repos: %>
-          <div class="repository">
+          <div class="repository<% unless repo.homepage: %> no-homepage<% end %>">
+            <% if repo.homepage: %>
+            <a href="<%= repo.homepage %>">
+              <img src="images/<%= repo.id %>.png">
+            </a>
+            <% end %>
             <div class="content">
-              <div class="header">
-                <h2><a href="<%= repo.homepage %>"><%= repo.name %></a></h2>
-                <img src="<%= repo.owner.avatar_url %>">
-              </div>
+              <h2><a href="<%= repo.homepage || repo.html_url %>"><%= repo.name %></a></h2>
               <p><%= repo.description %><p>
             </div>
             <div class="meta">

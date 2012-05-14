@@ -151,14 +151,7 @@ takeScreenshots = (repos, callback)->
   Async.forEach repos, (repo, done)->
     return done() unless repo.homepage
     screenshot repo.homepage, "#{__dirname}/html/images/#{repo.id}.png", done
-  , (err)->
-
-
-options =
-  organization: "demandforce"
-  minWatchers:  5
-  topRepos:     6
-  memberRepos:  5
+  , callback
 
 
 # Retrieve what we need and render it to stdout.
