@@ -34,7 +34,7 @@
       <div id="members">
         <div class="wrapper">
           <h1>The people who make this all possible</h1>
-          <% for member in @members: %>
+          <% for member in @contributors: %>
             <div class="member">
               <a href="<%= member.html_url %>">
                 <h2><%= member.name %></h2>
@@ -42,11 +42,6 @@
                   <img src="<%= member.avatar_url %>">
                 </div>
               </a>
-              <ol>
-                <% for repo in member.repos.slice(0, @memberRepos): %>
-                  <a href="<%= repo.homepage %>"><%= repo.name %></a>
-                <% end %>
-              </ol>
             </div>
           <% end %>
         </div>
