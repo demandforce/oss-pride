@@ -5,7 +5,7 @@ Less    = require("less")
 File    = require("fs")
 
 require("eco")
-body = require("./src/index")
+index = require("./src/index")
 
 
 # Retrieve organization members in alphabetical order.
@@ -94,31 +94,14 @@ retrieve = (options, callback)->
       callback repos: repos, members: members
 
 
-# Renders the page and writes it to disk in `./rendered`.
-# Passes an error (if any) to the `callback`.
-#
-# Accepts a data object passed to the template containing
-# arrays of `repos` and `members`
-render = (data, callback)->
-  Async.parallel
-    less: (done)->
-      File.readFile "#{__dirname}/src/stylesheets/screen.less", "utf8", (err, less)->
-        return done(err) if err
-        Less.render less, paths: ["./src/stylesheets"], (err, css)->
-          return done(err) if err
-          File.writeFile "#{__dirname}/rendered/stylesheets/screen.css", css, done
-    index: (done)->
-      File.writeFile "#{__dirname}/rendered/index.html", body(data), done
-  , (err)->
-    callback(err)
-
-
 options =
   organization: "demandforce"
   minWatchers:  5
   topRepos:     6
   memberRepos:  5
 
+
+# Retrieve what we need and render it to stdout.
 retrieve options, (result)->
-  render result, (err)->
-    console.log "All good." unless err
+  html = index(data)
+  process.stdout.write html
