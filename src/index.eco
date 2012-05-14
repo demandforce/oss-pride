@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Open Source at Demandforce</title>
+  <link rel="stylesheet" type="text/css" href="stylesheets/screen.css">
+</head>
+<body>
+  <div id="header">
+    <h1>Open Source</h1>
+    <div id="organization-name">Demandforce</div>
+  </div>
+  <div id="content">
+    <div id="repositories">
+      <div class="wrapper">
+        <h1>Some of the cool projects we're working on</h1>
+        <% for repo in @repos: %>
+          <div class="repository">
+            <div class="content">
+              <div class="header">
+                <h2><a href="<%= repo.homepage %>"><%= repo.name %></a></h2>
+                <img src="<%= repo.owner.avatar_url %>">
+              </div>
+              <p><%= repo.description %><p>
+            </div>
+            <div class="meta">
+              <span class="view"><a href="<%= repo.html_url %>">View on Github</a></span>
+              <span class="watchers"><%= repo.watchers.format(0) %> Watchers</span>
+              <span class="forks"><%= repo.forks.format(0) %> Forks</span>
+            </div> 
+          </div>
+        <% end %>
+        </div>
+      </div>
+      <div id="members">
+        <div class="wrapper">
+          <h1>The people who make this all possible</h1>
+          <% for member in @members: %>
+            <div class="member">
+              <h2><a href="<%= member.html_url %>"><%= member.name %></a></h2>
+              <div class="avatar">
+                <img src="<%= member.avatar_url %>">
+              </div>
+              <ol>
+                <% for repo in member.repos.slice(0, @memberRepos): %>
+                  <a href="<%= repo.homepage %>"><%= repo.name %></a>
+                <% end %>
+              </ol>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="footer">
+    Some footer action
+  </div>
+</body>
+</html>

@@ -1,0 +1,172 @@
+@import "libs/bootstrap";
+
+#reset > .global-reset;
+
+.inline-block {
+  & {
+    *display: inline;
+  }
+  display: -moz-inline-box;
+  -moz-box-orient: vertical;
+  display: inline-block;
+  vertical-align: middle;
+  *vertical-align: auto;
+}
+
+body {
+  #font > .sans-serif;
+  font-size: 13px;
+  background: url("../images/old_mathematics.png");
+  color: #555;
+}
+
+a {
+  color: #369;
+}
+
+#header {
+  width: 978px;
+  margin: 50px auto;
+  .clearfix();
+  h1 {
+    font-size: 48px;
+    font-weight: 300;
+    float: left;
+  }
+  #organization-name {
+    float: right;
+  }
+}
+
+#footer {
+  width: 978px;
+  margin: 50px auto;
+  .clearfix();
+}
+
+#content {
+  background: rgba(255,255,255,0.7);
+  //.box-shadow(rgba(0,0,0,0.4) 0 0 5px 0 inset);
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  .wrapper {
+    width: 978px;
+    margin: 0 auto;
+  }
+  h1 {
+    font-weight: 700;
+    text-align: center;
+    font-size: 36px;
+    margin-bottom: 50px;
+  }
+}
+
+#repositories {
+  .clearfix();
+  padding: 50px 0 10px;
+}
+
+.repository {
+  float: left;
+  margin: 0 40px 40px 0;
+  width: 467px;
+  background: #fff;
+  .border-radius(3px);
+  border: 1px solid #bbb;
+  .box-shadow(rgba(0,0,0,0.1) 0 1px 2px);
+  position: relative;
+  padding-bottom: 40px;
+  height: 150px;
+
+  &:nth-child(2n + 1) {
+    margin-right: 0;
+  }
+
+  .content {
+    padding: 30px;
+  }
+  .header {
+    .clearfix();
+    margin-bottom: 20px;
+  }
+  h2 {
+    font-size: 30px;
+    font-weight: 300;
+    float: left;
+    line-height: 32px;
+    a {
+      text-decoration: none;
+    }
+  }
+  img {
+    float: right;
+    width: 32px;
+    height: 32px;
+    .border-radius(2px);
+  }
+  .meta {
+    padding: 0 30px;
+    line-height: 40px;
+    background: #EDEFF0;
+    .border-radius(0 0 3px 3px);
+    position: absolute;
+    width: 407px;
+    bottom: 0;
+    left: 0;
+    font-weight: bold;
+    text-align: right;
+    .view {
+      position: absolute;
+      left: 30px;
+      top: 0;
+      font-size: 14px;
+      a {
+        color: #8C9EA7;
+        text-decoration: none;
+      }
+    }
+    .watchers, .forks {
+      font-size: 12px;
+      color: #B6C0C7;
+      .inline-block();
+      margin-left: 20px;
+    }
+  }
+}
+
+#members {
+  text-align: center;
+  padding: 50px 0;
+  border-top: 1px solid #ddd;
+}
+
+.member {
+  .inline-block();
+  width: 175px;
+
+  h2 {
+    font-weight: bold;
+    font-size: 15px;
+    margin-bottom: 10px;
+    a {
+      color: #555;
+      text-decoration: none;
+    }
+  }
+
+  .avatar {
+    .border-radius(50%);
+    line-height: 0;
+    .inline-block();
+    border: 5px solid #fff;
+    .box-shadow(rgba(0,0,0,0.3) 0 1px 4px);
+    img {
+      .border-radius(50%);
+    }
+  }
+
+
+  ol {
+    display: none;
+  }
+}
