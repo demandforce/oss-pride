@@ -1,7 +1,6 @@
 default : render
 .PHONY : clean render
 
-
 render : clean html/index.html html/stylesheets html/images
 
 clean :

@@ -3,6 +3,7 @@ Request = require("request")
 Sugar   = require("sugar")
 Less    = require("less")
 File    = require("fs")
+exec    = require("child_process").exec
 
 require("eco")
 index = require("./src/index")
@@ -131,13 +132,36 @@ retrieve = (options, callback)->
   retrieveMembers options, (members)->
     retrieveOrgRepos options, members, (repos)->
       retrieveContributors repos, members, (contributors)->
-        callback
-          repos:        repos.slice(0, options.topRepos)
-          members:      members
-          contributors: contributors
+        top_repos = repos.slice(0, options.topRepos)
+        takeScreenshots top_repos, ->
+          callback
+            repos:        top_repos
+            members:      members
+            contributors: contributors
+
+
+# Takes a screenshot of the `url` and passes the 
+screenshot = (url, save_to, callback)->
+  exec "phantomjs #{__dirname}/scripts/screenshot.coffee #{url} #{save_to}", callback
+
+
+# Given an array of `repos`, it takes a screenshot of each of them and
+# saves it to the appropriate path.
+takeScreenshots = (repos, callback)->
+  Async.forEach repos, (repo, done)->
+    return done() unless repo.homepage
+    screenshot repo.homepage, "#{__dirname}/html/images/#{repo.id}.png", done
+  , (err)->
+
+
+options =
+  organization: "demandforce"
+  minWatchers:  5
+  topRepos:     6
+  memberRepos:  5
 
 
 # Retrieve what we need and render it to stdout.
-retrieve options, (result)->
-  html = index(result)
+retrieve options, (data)->
+  html = index(data)
   process.stdout.write html
