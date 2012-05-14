@@ -5,6 +5,7 @@ render : clean html/index.html html/stylesheets html/images
 
 clean :
 	rm -rf html
+	rm -rf public
 
 # Build all the assets in the html directory
 html/index.html : render.coffee src/index.eco
@@ -16,3 +17,14 @@ html/stylesheets : src/stylesheets/screen.less
 html/images: src/images/old_mathematics.png
 	mkdir -p html/images
 	cp src/images/old_mathematics.png html/images/old_mathematics.png
+
+
+# Update the public repository
+public : render
+	git clone git@github.com:demandforce/demandforce.github.com.git public
+	mv html/* public/
+
+publish : public
+	git add --all
+	git commit -m "Update for $(date)"
+	git push
