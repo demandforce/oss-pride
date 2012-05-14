@@ -93,9 +93,18 @@ retrieveContributors = (repos, members, callback)->
         map[member.login] = member
         return map
       , {})
+    # Next get the list of unique contributors and sort alphabetically.
     contributors = Object.values(contributors)
       .sort((a, b)-> a.name >= b.name)
-    callback contributors
+
+    # We want their full name and URL
+    Async.map contributors, (contributor, done)->
+      Request.get "https://api.github.com/users/#{contributor.login}", (error, response, body)->
+        done error, body && JSON.parse(body)
+    , (error, contributors)->
+      if error
+        throw error
+      callback contributors
 
 
 # Retrieve organization and member repositories and pass the following object to
