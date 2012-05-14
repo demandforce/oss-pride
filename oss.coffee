@@ -8,8 +8,7 @@ require("eco")
 body = require("./src/index")
 
 
-# Retrieve organization members that have one or more repositories with at least
-# minimum number of watchers and passes that list in alphabetical order.
+# Retrieve organization members in alphabetical order.
 retrieveMembers = ({ organization, minWatchers, memberRepos }, callback)->
   Request.get "https://api.github.com/orgs/#{organization}/members", (error, response, body)->
     if error
@@ -48,12 +47,7 @@ retrieveMembers = ({ organization, minWatchers, memberRepos }, callback)->
       , (error, members)->
         if error
           throw error
-        # We're only interested in members that have interesting public
-        # repositories
-        sorted = members.
-          filter((member)-> member.repos && member.repos.length > 0).
-          sort((a, b)-> a.name >= b.name)
-        callback sorted
+        callback members.sort((a, b)-> a.name >= b.name)
 
 
 # Retrieve organization repositories that have more than minimum number of
