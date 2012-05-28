@@ -48,13 +48,18 @@ retrieveMembers = ({ organization }, callback)->
               # watchers.
               member.repos = repos
                 .filter((repo)-> !repo.fork)
-                .sort((a,b)-> b.watchers - a.watchers)
+                .sort((a, b)-> rank(b) - rank(a))
             done null, member
       , (error, members)->
         if error
           throw error
         # Pass members list, sorted alphabetically.
         callback members.sort((a, b)-> a.name >= b.name)
+
+
+rank = (repo)->
+  days_old = (Date.now() - new Date(repo.pushed_at)) / 86400000
+  return (repo.watchers + repo.forks * 2) * (1- days_old * 0.005)
 
 
 # Retrieve organization repositories, merge with member repositories, pass to
