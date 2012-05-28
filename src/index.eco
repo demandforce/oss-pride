@@ -37,7 +37,7 @@
           <h1>The people who make this all possible</h1>
           <% for contributor in @contributors: %>
             <div class="member">
-              <a href="<%= contributor.html_url %>" title="<%= contributor.name %>">
+              <a href="<%= contributor.html_url %>" title="<%= contributor.name || contributor.login %>">
                 <div class="avatar"><img src="<%= contributor.avatar_url %>"></div>
               </a>
             </div>

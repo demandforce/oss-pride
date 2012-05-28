@@ -22,6 +22,7 @@ html/images: src/images/old_mathematics.png
 # Update the public repository
 public : render
 	git clone git@github.com:demandforce/demandforce.github.com.git public
+	rm -rf public/*
 	mv html/* public/
 
 publish : public
