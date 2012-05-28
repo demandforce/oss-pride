@@ -40,9 +40,6 @@
               <a href="<%= contributor.html_url %>" title="<%= contributor.name %>">
                 <div class="avatar"><img src="<%= contributor.avatar_url %>"></div>
               </a>
-              <div class="more">
-                <h3><%= contributor.name %></h3>
-              </div>
             </div>
           <% end %>
         </div>
